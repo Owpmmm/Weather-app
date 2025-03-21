@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div>
-      <h1>Weather App</h1>
+      <h1>☀️Check Weather☀️</h1>
 
       <div>
         <input
