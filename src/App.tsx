@@ -27,15 +27,20 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchWeather = async () => {
-    const apiKey = 'd8b29fad59d81b3a8261cbd092519501';
+    if (!city.trim()) {
+      setError("Please enter a city name.");
+      return;
+    }
+    
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
+  
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('City not found');
       }
-
+  
       const data: WeatherData = await response.json();
       setWeather(data);
       setError(null);
@@ -44,6 +49,7 @@ function App() {
       setError('City not found. Please try again.');
     }
   };
+  
 
   return (
     <div>
